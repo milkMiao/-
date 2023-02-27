@@ -1,16 +1,29 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import { ConfigProvider } from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import Vue from 'vue'
+import App from './App.vue'
+import VueRouter from 'vue-router'
+import Ant from 'ant-design-vue'
 
-Vue.config.productionTip = false;
+import routes from './routes'
+import startQiankun from './micro'
 
-Vue.use(ConfigProvider)
+import "./assets/styles/locale.antd.css"
+
+Vue.use(VueRouter);
+Vue.use(Ant)
+Vue.config.productionTip = false
+
+startQiankun();
+
+/**
+ * 注册路由实例
+ * 即将开始监听 location 变化，触发路由规则
+ */
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
 
 new Vue({
   router,
-  store,
-  render: (h) => h(App),
-}).$mount("#app");
+  render: h => h(App),
+}).$mount('#app')
